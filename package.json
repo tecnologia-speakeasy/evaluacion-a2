@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "db:setup": "node scripts/setup-db.mjs",
-    "db:load-emails": "node scripts/load-emails.mjs",
-    "zoom:test": "node scripts/zoom-test.mjs"
+    "db:load-emails": "node scripts/load-emails.mjs"
   },
   "dependencies": {
     "axios": "^1.6.0",

@@ -37,22 +37,11 @@ export async function POST(request) {
     // TODAS las preguntas (las columnas p1–p10 son legado de 10 preguntas).
     const { perQuestion } = gradeObjective(answers);
 
-    // Puntaje de speaking (cargado manualmente; 0 si aún no lo tiene).
-    let speakingScore = 0;
-    try {
-      const sp = await query(
-        "SELECT COALESCE(score, 0) AS s FROM speaking_scores WHERE lower(trim(email)) = $1 LIMIT 1",
-        [email]
-      );
-      speakingScore = Number(sp.rows[0]?.s) || 0;
-    } catch {}
-
     return NextResponse.json({
       exists: true,
       total_score: r.puntaje_total,
       feedback: r.feedback,
       detailed_results: buildDetailedResults(answers, perQuestion),
-      speaking_score: speakingScore,
       answers,
     });
   } catch (err) {

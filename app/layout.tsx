@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Speak Easy",
-  description: "Evaluación y agendamiento · Speak Easy",
+  description: "Evaluación · Speak Easy",
   icons: {
     icon: { url: "/logo.webp", type: "image/webp" },
   },

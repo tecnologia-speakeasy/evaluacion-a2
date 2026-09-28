@@ -50,18 +50,6 @@ export async function POST(request) {
   const { perQuestion } = gradeObjective(answers);
   const detailed = buildDetailedResults(answers, perQuestion);
 
-  // Puntaje de speaking (cargado manualmente; 0 si aún no lo tiene).
-  let speakingScore = 0;
-  try {
-    const sp = await query(
-      "SELECT COALESCE(score, 0) AS s FROM speaking_scores WHERE lower(trim(email)) = $1 LIMIT 1",
-      [email]
-    );
-    speakingScore = Number(sp.rows[0]?.s) || 0;
-  } catch (err) {
-    console.error("[/api/feedback] Error consultando speaking:", err);
-  }
-
   // Si ya hay feedback guardado, lo devolvemos tal cual.
   if (row.feedback) {
     return NextResponse.json({
@@ -69,7 +57,6 @@ export async function POST(request) {
       feedback: row.feedback,
       total_score: row.puntaje_total,
       detailed_results: detailed,
-      speaking_score: speakingScore,
     });
   }
 
@@ -128,6 +115,5 @@ export async function POST(request) {
     feedback: feedbackText,
     total_score: row.puntaje_total,
     detailed_results: detailed,
-    speaking_score: speakingScore,
   });
 }

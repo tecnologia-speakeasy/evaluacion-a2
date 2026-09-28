@@ -6,162 +6,169 @@ import { celebracionPorPuntaje } from "@/lib/celebracion";
 
 // ─── Exam Data ────────────────────────────────────────────────────────────────
 const ALL_EXAM_QUESTIONS = [
-  { id: 1, type: "multiple_choice", question: "Canadá ______ a very cold country in winter.",
-    options: ["are", "is", "am", "be"], correct: "is" },
-  { id: 2, type: "multiple_choice", question: "My sister ______ English every night.",
-    options: ["study", "studying", "studies", "is study"], correct: "studies" },
-  { id: 3, type: "multiple_choice", question: "The dogs ______ in the park right now.",
-    options: ["run", "runs", "are running", "is running"], correct: "are running" },
-  { id: 4, type: "multiple_choice", question: "Marcos ______ coffee in the morning.",
-    options: ["don't drinks", "doesn't drinks", "doesn't drink", "isn't drink"], correct: "doesn't drink" },
-  { id: 5, type: "multiple_choice", question: "______ Brazil produce good coffee?",
-    options: ["Do", "Does", "Is", "Are"], correct: "Does" },
-  { id: 6, type: "multiple_choice", question: "The baby ______ now.",
-    options: ["sleeps", "sleep", "is sleeping", "are sleeping"], correct: "is sleeping" },
-  { id: 7, type: "multiple_choice", question: "My parents ______ at home today.",
-    options: ["is", "am", "are", "be"], correct: "are" },
-  { id: 8, type: "multiple_choice", question: "Laura ______ to music in the morning.",
-    options: ["listen", "listens", "listening", "is listen"], correct: "listens" },
-  { id: 9, type: "multiple_choice", question: "______ your teacher speak English?",
-    options: ["Do", "Does", "Is", "Are"], correct: "Does" },
-  { id: 10, type: "multiple_choice", question: "Mexico and Colombia ______ beautiful countries.",
-    options: ["is", "are", "am", "be"], correct: "are" },
-  { id: 11, type: "multiple_choice", question: "Samuel ______ his homework right now.",
-    options: ["does", "do", "is doing", "are doing"], correct: "is doing" },
-  { id: 12, type: "multiple_choice", question: "The cat ______ rice every day.",
-    options: ["don't eat", "doesn't eats", "doesn't eat", "isn't eat"], correct: "doesn't eat" },
-  { id: 13, type: "multiple_choice", question: "The bird ______ every morning.",
-    options: ["sing", "sings", "singing", "is sing"], correct: "sings" },
-  { id: 14, type: "multiple_choice", question: "______ the students studying now?",
-    options: ["Do", "Does", "Is", "Are"], correct: "Are" },
-  { id: 15, type: "multiple_choice", question: "Germany ______ in Europe.",
-    options: ["are", "is", "am", "be"], correct: "is" },
-  { id: 16, type: "multiple_choice", question: "My brother ______ soccer on Sundays.",
-    options: ["play", "plays", "playing", "is play"], correct: "plays" },
-  { id: 17, type: "multiple_choice", question: "Camila and Juan ______ cold weather.",
-    options: ["doesn't like", "don't likes", "don't like", "aren't like"], correct: "don't like" },
-  { id: 18, type: "multiple_choice", question: "I ______ from Colombia.",
-    options: ["is", "are", "am", "be"], correct: "am" },
-  { id: 19, type: "multiple_choice", question: "The elephant ______ a lot of water every day.",
-    options: ["drink", "drinks", "drinking", "is drink"], correct: "drinks" },
-  { id: 20, type: "multiple_choice", question: "______ Ana and Pedro watching a movie?",
-    options: ["Is", "Am", "Are", "Do"], correct: "Are" },
-  { id: 21, type: "multiple_choice", question: "My phone ______ on the desk.",
-    options: ["am", "are", "is", "be"], correct: "is" },
-  { id: 22, type: "multiple_choice", question: "The children ______ in the garden right now.",
-    options: ["play", "plays", "are playing", "is playing"], correct: "are playing" },
-  { id: 23, type: "multiple_choice", question: "Japan ______ many cars.",
-    options: ["make", "makes", "making", "is make"], correct: "makes" },
-  { id: 24, type: "multiple_choice", question: "I ______ vegetables every day.",
-    options: ["doesn't eat", "don't eats", "don't eat", "am not eat"], correct: "don't eat" },
-  { id: 25, type: "multiple_choice", question: "______ the fish swimming in the water?",
-    options: ["Are", "Is", "Do", "Does"], correct: "Is" },
-  { id: 26, type: "multiple_choice", question: "My friends ______ very happy today.",
-    options: ["is", "am", "are", "be"], correct: "are" },
-  { id: 27, type: "multiple_choice", question: "Sofia ______ her room on Saturdays.",
-    options: ["clean", "cleans", "cleaning", "is clean"], correct: "cleans" },
-  { id: 28, type: "multiple_choice", question: "______ your dog sleep in the kitchen?",
-    options: ["Do", "Does", "Is", "Are"], correct: "Does" },
-  { id: 29, type: "multiple_choice", question: "We ______ English at this moment.",
-    options: ["speak", "speaks", "are speaking", "is speaking"], correct: "are speaking" },
-  { id: 30, type: "multiple_choice", question: "The sun ______ in the morning.",
-    options: ["shine", "shines", "shining", "is shine"], correct: "shines" },
-  // ── Part 2 — Possessive Adjectives (completar: el estudiante escribe) ──
-  { id: 31, type: "fill_blank", question: "I am doing ______ homework now.", correct: "my" },
-  { id: 32, type: "fill_blank", question: "Sofia doesn't have ______ notebook today.", correct: "her" },
-  { id: 33, type: "fill_blank", question: "Does your brother clean ______ room on Saturdays?", correct: "his" },
-  { id: 34, type: "fill_blank", question: "We are studying English with ______ teacher.", correct: "our" },
-  { id: 35, type: "fill_blank", question: "The dog is eating ______ food in the kitchen.", correct: "its" },
-  { id: 36, type: "fill_blank", question: "Are you talking to ______ mother right now?", correct: "your" },
-  { id: 37, type: "fill_blank", question: "Colombia is famous for ______ coffee.", correct: "its" },
-  { id: 38, type: "fill_blank", question: "My parents don't use ______ car every day.", correct: "their" },
-  { id: 39, type: "fill_blank", question: "Camila is wearing ______ new shoes today.", correct: "her" },
-  { id: 40, type: "fill_blank", question: "Do you and Daniel like ______ English class?", correct: "your" },
-  { id: 41, type: "fill_blank", question: "The students are opening ______ books.", correct: "their" },
-  { id: 42, type: "fill_blank", question: "I don't drink coffee in ______ house.", correct: "my" },
-  { id: 43, type: "fill_blank", question: "Pedro is helping ______ sister with English.", correct: "his" },
-  { id: 44, type: "fill_blank", question: "We don't have ______ notebooks on the table.", correct: "our" },
-  { id: 45, type: "fill_blank", question: "Is Laura reading ______ book in ______ room?", correct: "her / her" },
-  // ── Part 3 — Demonstratives (completar) ──
-  { id: 46, type: "fill_blank", question: "______ is my phone here in my hand.", correct: "This" },
-  { id: 47, type: "fill_blank", question: "______ are my books here on my desk.", correct: "These" },
-  { id: 48, type: "fill_blank", question: "Is ______ your backpack over there near the door?", correct: "that" },
-  { id: 49, type: "fill_blank", question: "I don't like ______ shoes over there in the store window.", correct: "those" },
-  { id: 50, type: "fill_blank", question: "______ dog here next to me is very small.", correct: "This" },
-  { id: 51, type: "fill_blank", question: "Are ______ your pencils here on the table?", correct: "these" },
-  { id: 52, type: "fill_blank", question: "______ isn't my chair over there.", correct: "That" },
-  { id: 53, type: "fill_blank", question: "My sister is reading ______ book here.", correct: "this" },
-  { id: 54, type: "fill_blank", question: "______ apples over there are not fresh.", correct: "Those" },
-  { id: 55, type: "fill_blank", question: "Do you want ______ sandwich here on my plate?", correct: "this" },
-  { id: 56, type: "fill_blank", question: "______ students here in this classroom are studying right now.", correct: "These" },
-  { id: 57, type: "fill_blank", question: "I don't understand ______ word here in the sentence.", correct: "this" },
-  { id: 58, type: "fill_blank", question: "Are ______ your friends over there?", correct: "those" },
-  { id: 59, type: "fill_blank", question: "______ is not our classroom over there.", correct: "That" },
-  { id: 60, type: "fill_blank", question: "My parents don't use ______ old computers over there.", correct: "those" },
-  // ── Part 4 — Plurals (escribir el plural) ──
-  { id: 61, type: "fill_blank", question: "book → ______", correct: "books" },
-  { id: 62, type: "fill_blank", question: "box → ______", correct: "boxes" },
-  { id: 63, type: "fill_blank", question: "city → ______", correct: "cities" },
-  { id: 64, type: "fill_blank", question: "baby → ______", correct: "babies" },
-  { id: 65, type: "fill_blank", question: "bus → ______", correct: "buses" },
-  { id: 66, type: "fill_blank", question: "story → ______", correct: "stories" },
-  { id: 67, type: "fill_blank", question: "tomato → ______", correct: "tomatoes" },
-  { id: 68, type: "fill_blank", question: "potato → ______", correct: "potatoes" },
-  { id: 69, type: "fill_blank", question: "knife → ______", correct: "knives" },
-  { id: 70, type: "fill_blank", question: "leaf → ______", correct: "leaves" },
-  { id: 71, type: "fill_blank", question: "child → ______", correct: "children" },
-  { id: 72, type: "fill_blank", question: "person → ______", correct: "people" },
-  { id: 73, type: "fill_blank", question: "man → ______", correct: "men" },
-  { id: 74, type: "fill_blank", question: "woman → ______", correct: "women" },
-  { id: 75, type: "fill_blank", question: "foot → ______", correct: "feet" },
-  { id: 76, type: "fill_blank", question: "tooth → ______", correct: "teeth" },
-  { id: 77, type: "fill_blank", question: "mouse → ______", correct: "mice" },
-  { id: 78, type: "fill_blank", question: "country → ______", correct: "countries" },
-  { id: 79, type: "fill_blank", question: "toy → ______", correct: "toys" },
-  { id: 80, type: "fill_blank", question: "family → ______", correct: "families" },
-  // ── Part 5A — There is / There are ──
-  { id: 81, type: "fill_blank", question: "______ a book on the table.", correct: "There is" },
-  { id: 82, type: "fill_blank", question: "______ three chairs in the kitchen.", correct: "There are" },
-  { id: 83, type: "fill_blank", question: "______ any milk in the fridge. (-)", correct: "There isn't" },
-  { id: 84, type: "fill_blank", question: "______ two dogs in the park? (?)", correct: "Are there" },
-  { id: 85, type: "fill_blank", question: "______ a pencil in my backpack.", correct: "There is" },
-  { id: 86, type: "fill_blank", question: "______ any students in the classroom. (-)", correct: "There aren't" },
-  { id: 87, type: "fill_blank", question: "______ a phone on the desk? (?)", correct: "Is there" },
-  { id: 88, type: "fill_blank", question: "______ many apples in the bag.", correct: "There are" },
-  { id: 89, type: "fill_blank", question: "______ any water in the bottle. (-)", correct: "There isn't" },
-  { id: 90, type: "fill_blank", question: "______ a restaurant near the school? (?)", correct: "Is there" },
-  // ── Part 5B — Many / Much ──
-  { id: 91, type: "fill_blank", question: "There are ______ books on the shelf.", correct: "many" },
-  { id: 92, type: "fill_blank", question: "There isn't ______ water in the glass.", correct: "much" },
-  { id: 93, type: "fill_blank", question: "Are there ______ students in your class?", correct: "many" },
-  { id: 94, type: "fill_blank", question: "I don't have ______ money today.", correct: "much" },
-  { id: 95, type: "fill_blank", question: "There aren't ______ chairs in the room.", correct: "many" },
-  { id: 96, type: "fill_blank", question: "Does your sister drink ______ coffee?", correct: "much" },
-  { id: 97, type: "fill_blank", question: "There are ______ pencils on the desk.", correct: "many" },
-  { id: 98, type: "fill_blank", question: "We don't eat ______ bread at night.", correct: "much" },
-  { id: 99, type: "fill_blank", question: "Are there ______ apples in the kitchen?", correct: "many" },
-  { id: 100, type: "fill_blank", question: "My brother doesn't drink ______ milk in the morning.", correct: "much" },
-  // ── Part 6 — Translation (escribir la traducción al inglés) ──
-  { id: 101, type: "translation", question: "Mi hermana estudia inglés todos los días.", correct: "My sister studies English every day." },
-  { id: 102, type: "translation", question: "Carlos no trabaja los domingos.", correct: "Carlos doesn't work on Sundays." },
-  { id: 103, type: "translation", question: "¿Tu mamá vive en Colombia?", correct: "Does your mom live in Colombia?" },
-  { id: 104, type: "translation", question: "No hay huevos en la cocina.", correct: "There aren't any eggs in the kitchen." },
-  { id: 105, type: "translation", question: "Maria debería estudiar inglés.", correct: "Maria should study English." },
-  { id: 106, type: "translation", question: "Hay muchos libros en la mesa.", correct: "There are many books on the table." },
-  { id: 107, type: "translation", question: "Necesito comprar un celular, pero no tengo dinero.", correct: "I need to buy a phone, but I don't have money." },
-  { id: 108, type: "translation", question: "¿Hay estudiantes en la clase?", correct: "Are there students in the class?" },
-  { id: 109, type: "translation", question: "Laura está leyendo su libro favorito.", correct: "Laura is reading her favorite book." },
-  { id: 110, type: "translation", question: "Juan puede viajar con sus amigos, porque su papá tiene mucho dinero.", correct: "Juan can travel with his friends because his dad has a lot of money." },
-  { id: 111, type: "translation", question: "Tú deberías practicar estas palabras en casa.", correct: "You should practice these words at home." },
-  { id: 112, type: "translation", question: "Ellos deben limpiar su habitación hoy.", correct: "They must clean their room today." },
-  { id: 113, type: "translation", question: "Tú no puedes dormir, tienes que estudiar para el exámen.", correct: "You can't sleep. You have to study for the exam." },
-  { id: 114, type: "translation", question: "¿Sofía quiere aprender inglés?", correct: "Does Sofia want to learn English?" },
-  { id: 115, type: "translation", question: "Los niños en Colombia deben practicar un deporte.", correct: "Children in Colombia must practice a sport." },
+  // ── Part 1 — Multiple Choice ──
+  { id: 1, type: "multiple_choice", question: "Carlos ______ at home yesterday.",
+    options: ["were", "was", "is", "be"], correct: "was" },
+  { id: 2, type: "multiple_choice", question: "My friends ______ watching a movie when I called them.",
+    options: ["was", "were", "are", "did"], correct: "were" },
+  { id: 3, type: "multiple_choice", question: "There ______ many people at the supermarket last night.",
+    options: ["was", "were", "is", "are"], correct: "were" },
+  { id: 4, type: "multiple_choice", question: "I think Sofia ______ call you tomorrow.",
+    options: ["is", "was", "will", "did"], correct: "will" },
+  { id: 5, type: "multiple_choice", question: "Daniel ______ to work by bus yesterday.",
+    options: ["go", "goes", "went", "going"], correct: "went" },
+  { id: 6, type: "multiple_choice", question: "My sister ______ studying when my mom arrived.",
+    options: ["were", "was", "is", "did"], correct: "was" },
+  { id: 7, type: "multiple_choice", question: "______ there any milk in the fridge yesterday?",
+    options: ["Was", "Were", "Is", "Are"], correct: "Was" },
+  { id: 8, type: "multiple_choice", question: "They ______ visit their grandparents next weekend.",
+    options: ["are going to", "was going to", "going to", "went to"], correct: "are going to" },
+  { id: 9, type: "multiple_choice", question: "Laura didn’t ______ dinner at home last night.",
+    options: ["ate", "eats", "eat", "eating"], correct: "eat" },
+  { id: 10, type: "multiple_choice", question: "My brother can help ______ with your homework.",
+    options: ["I", "me", "my", "myself"], correct: "me" },
+  { id: 11, type: "multiple_choice", question: "The children ______ happy after the class.",
+    options: ["was", "were", "did", "are being"], correct: "were" },
+  { id: 12, type: "multiple_choice", question: "We ______ soccer when it started to rain.",
+    options: ["played", "play", "were playing", "was playing"], correct: "were playing" },
+  { id: 13, type: "multiple_choice", question: "There ______ a big dog in front of the house.",
+    options: ["were", "was", "are", "be"], correct: "was" },
+  { id: 14, type: "multiple_choice", question: "Maria ______ travel to Canada next year.",
+    options: ["is going to", "are going to", "going to", "went to"], correct: "is going to" },
+  { id: 15, type: "multiple_choice", question: "Did your teacher ______ the lesson again?",
+    options: ["explained", "explains", "explain", "explaining"], correct: "explain" },
+  { id: 16, type: "multiple_choice", question: "You should ______ more water.",
+    options: ["drinks", "drink", "drinking", "to drink"], correct: "drink" },
+  { id: 17, type: "multiple_choice", question: "The cat cleaned ______ after eating.",
+    options: ["himself", "herself", "itself", "themselves"], correct: "itself" },
+  { id: 18, type: "multiple_choice", question: "Colombia ______ play against Brazil next month.",
+    options: ["will", "was", "did", "were"], correct: "will" },
+  { id: 19, type: "multiple_choice", question: "My parents didn’t ______ TV yesterday.",
+    options: ["watched", "watches", "watch", "watching"], correct: "watch" },
+  { id: 20, type: "multiple_choice", question: "Samuel and I ______ at school last Friday.",
+    options: ["was", "were", "is", "did"], correct: "were" },
+  { id: 21, type: "multiple_choice", question: "______ you studying English at 8 p.m.?",
+    options: ["Was", "Were", "Did", "Are"], correct: "Were" },
+  { id: 22, type: "multiple_choice", question: "There weren’t ______ chairs in the classroom.",
+    options: ["some", "any", "much", "a"], correct: "any" },
+  { id: 23, type: "multiple_choice", question: "My sister must ______ her room today.",
+    options: ["cleans", "cleaned", "clean", "cleaning"], correct: "clean" },
+  { id: 24, type: "multiple_choice", question: "I saw Pedro, but he didn’t see ______.",
+    options: ["I", "my", "me", "myself"], correct: "me" },
+  { id: 25, type: "multiple_choice", question: "The students ______ a test yesterday.",
+    options: ["have", "had", "has", "having"], correct: "had" },
+  { id: 26, type: "multiple_choice", question: "______ there a restaurant near the hotel?",
+    options: ["Were", "Was", "Did", "Are"], correct: "Was" },
+  { id: 27, type: "multiple_choice", question: "Camila is going to ______ English tonight.",
+    options: ["studies", "studied", "study", "studying"], correct: "study" },
+  { id: 28, type: "multiple_choice", question: "They hurt ______ during the game.",
+    options: ["himself", "herself", "ourselves", "themselves"], correct: "themselves" },
+  { id: 29, type: "multiple_choice", question: "We ______ buy a new computer next month.",
+    options: ["will", "was", "did", "were"], correct: "will" },
+  { id: 30, type: "multiple_choice", question: "Did Mariana ______ her homework yesterday?",
+    options: ["finished", "finishes", "finish", "finishing"], correct: "finish" },
+  // ── Part 2 — Past Simple Verbs (completar: el estudiante escribe) ──
+  { id: 31, type: "fill_blank", question: "go → ______", correct: "went" },
+  { id: 32, type: "fill_blank", question: "clean → ______", correct: "cleaned" },
+  { id: 33, type: "fill_blank", question: "eat → ______", correct: "ate" },
+  { id: 34, type: "fill_blank", question: "study → ______", correct: "studied" },
+  { id: 35, type: "fill_blank", question: "have → ______", correct: "had" },
+  { id: 36, type: "fill_blank", question: "watch → ______", correct: "watched" },
+  { id: 37, type: "fill_blank", question: "see → ______", correct: "saw" },
+  { id: 38, type: "fill_blank", question: "live → ______", correct: "lived" },
+  { id: 39, type: "fill_blank", question: "buy → ______", correct: "bought" },
+  { id: 40, type: "fill_blank", question: "visit → ______", correct: "visited" },
+  { id: 41, type: "fill_blank", question: "take → ______", correct: "took" },
+  { id: 42, type: "fill_blank", question: "call → ______", correct: "called" },
+  { id: 43, type: "fill_blank", question: "make → ______", correct: "made" },
+  { id: 44, type: "fill_blank", question: "play → ______", correct: "played" },
+  { id: 45, type: "fill_blank", question: "come → ______", correct: "came" },
+  { id: 46, type: "fill_blank", question: "need → ______", correct: "needed" },
+  { id: 47, type: "fill_blank", question: "drink → ______", correct: "drank" },
+  { id: 48, type: "fill_blank", question: "work → ______", correct: "worked" },
+  { id: 49, type: "fill_blank", question: "write → ______", correct: "wrote" },
+  { id: 50, type: "fill_blank", question: "travel → ______", correct: "traveled / travelled" },
+  // ── Part 3 — Complete the Sentences (hint = verbo entre paréntesis, va debajo) ──
+  { id: 51, type: "fill_blank", question: "My mom ______ very tired yesterday.", hint: "(be)", correct: "was" },
+  { id: 52, type: "fill_blank", question: "The kids ______ in the park when it started to rain.", hint: "(play)", correct: "were playing" },
+  { id: 53, type: "fill_blank", question: "There ______ many books on the table last night.", hint: "(be)", correct: "were" },
+  { id: 54, type: "fill_blank", question: "I ______ my friend after class yesterday.", hint: "(call)", correct: "called" },
+  { id: 55, type: "fill_blank", question: "Daniel didn’t ______ to the gym last weekend.", hint: "(go)", correct: "go" },
+  { id: 56, type: "fill_blank", question: "Sofia ______ dinner when her dad arrived.", hint: "(cook)", correct: "was cooking" },
+  { id: 57, type: "fill_blank", question: "We ______ at home last Sunday.", hint: "(be)", correct: "were" },
+  { id: 58, type: "fill_blank", question: "There ______ any students in the room yesterday. (-)", hint: "(be)", correct: "weren’t / were not" },
+  { id: 59, type: "fill_blank", question: "My brother ______ his phone yesterday.", hint: "(lose)", correct: "lost" },
+  { id: 60, type: "fill_blank", question: "They ______ visit their family tomorrow.", hint: "(be going to)", correct: "are going to / ’re going to" },
+  { id: 61, type: "fill_blank", question: "Carlos ______ his keys yesterday.", hint: "(lose)", correct: "lost" },
+  { id: 62, type: "fill_blank", question: "I ______ working when you called me.", hint: "(be)", correct: "was" },
+  { id: 63, type: "fill_blank", question: "Laura ______ coffee this morning.", hint: "(drink)", correct: "drank" },
+  { id: 64, type: "fill_blank", question: "There ______ a problem with my phone last night.", hint: "(be)", correct: "was" },
+  { id: 65, type: "fill_blank", question: "My friends ______ a movie next Friday.", hint: "(will / watch)", correct: "will watch / ’ll watch" },
+  // ── Part 4 — Object Pronouns (completar) ──
+  { id: 66, type: "fill_blank", question: "This exercise is difficult. I don’t understand ______.", correct: "it" },
+  { id: 67, type: "fill_blank", question: "Laura is my friend. I always help ______ with English.", correct: "her" },
+  { id: 68, type: "fill_blank", question: "Pedro is calling you. Please answer ______.", correct: "him" },
+  { id: 69, type: "fill_blank", question: "My parents are at the door. Can you see ______?", correct: "them" },
+  { id: 70, type: "fill_blank", question: "We are lost. Can you help ______?", correct: "us" },
+  { id: 71, type: "fill_blank", question: "I need your number. Can you send ______ a message?", correct: "me" },
+  { id: 72, type: "fill_blank", question: "That dog is very friendly. I like ______.", correct: "it" },
+  { id: 73, type: "fill_blank", question: "Daniel doesn’t know the answer. The teacher is helping ______.", correct: "him" },
+  { id: 74, type: "fill_blank", question: "These exercises are difficult. I don’t understand ______.", correct: "them" },
+  { id: 75, type: "fill_blank", question: "You are speaking too fast. I can’t understand ______.", correct: "you" },
+  // ── Part 5 — Modal Verbs (completar) ──
+  { id: 76, type: "fill_blank", question: "You ______ study for the exam. The exam is tomorrow, and you need a good grade.", correct: "should" },
+  { id: 77, type: "fill_blank", question: "My sister ______ speak English very well.", correct: "can" },
+  { id: 78, type: "fill_blank", question: "Students ______ turn off their phones during the exam. It is a school rule.", correct: "must" },
+  { id: 79, type: "fill_blank", question: "You ______ drink more water. It is good for your health.", correct: "should" },
+  { id: 80, type: "fill_blank", question: "Carlos ______ play the guitar, but he can’t sing.", correct: "can" },
+  { id: 81, type: "fill_blank", question: "We ______ be quiet in the library. It is not allowed to make noise there.", correct: "must" },
+  { id: 82, type: "fill_blank", question: "You ______ practice every day if you want to improve your English.", correct: "should" },
+  { id: 83, type: "fill_blank", question: "I ______ help you after class. I have free time today.", correct: "can" },
+  { id: 84, type: "fill_blank", question: "They ______ clean their room today. Their mom said it is necessary.", correct: "must" },
+  { id: 85, type: "fill_blank", question: "She ______ visit a doctor because she feels sick.", correct: "should" },
+  // ── Part 6 — Reflexive Pronouns (completar) ──
+  { id: 86, type: "fill_blank", question: "I prepared the presentation by ______.", correct: "myself" },
+  { id: 87, type: "fill_blank", question: "Sofia looked at ______ in the mirror.", correct: "herself" },
+  { id: 88, type: "fill_blank", question: "Carlos hurt ______ during the soccer game.", correct: "himself" },
+  { id: 89, type: "fill_blank", question: "The children dressed ______ for school.", correct: "themselves" },
+  { id: 90, type: "fill_blank", question: "We did the project by ____________.", correct: "ourselves" },
+  { id: 91, type: "fill_blank", question: "Did you make this cake by ______?", correct: "yourself" },
+  { id: 92, type: "fill_blank", question: "The cat cleaned ______ after eating.", correct: "itself" },
+  { id: 93, type: "fill_blank", question: "You and your brother should prepare ______ for the test.", correct: "yourselves" },
+  { id: 94, type: "fill_blank", question: "I don’t want to repeat ______ again.", correct: "myself" },
+  { id: 95, type: "fill_blank", question: "My parents introduced ______ to the new teacher.", correct: "themselves" },
+  // ── Part 7 — Future Form (completar) ──
+  { id: 96, type: "fill_blank", question: "Look at those clouds. It ______ rain.", correct: "is going to / ’s going to" },
+  { id: 97, type: "fill_blank", question: "I think Colombia ______ win the game.", correct: "will / ’ll" },
+  { id: 98, type: "fill_blank", question: "We ______ visit my grandmother this weekend. We already have the tickets.", correct: "are going to / ’re going to" },
+  { id: 99, type: "fill_blank", question: "She is tired. She ______ to bed early tonight.", correct: "is going to / ’s going to" },
+  { id: 100, type: "fill_blank", question: "Maybe I ______ study medicine in the future.", correct: "will / ’ll" },
+  { id: 101, type: "fill_blank", question: "They bought food and drinks. They ______ have a party.", correct: "are going to / ’re going to" },
+  { id: 102, type: "fill_blank", question: "I’m sure you ______ like this movie.", correct: "will / ’ll" },
+  { id: 103, type: "fill_blank", question: "He has a plane ticket. He ______ travel tomorrow.", correct: "is going to / ’s going to" },
+  { id: 104, type: "fill_blank", question: "Don’t worry. I ______ help you.", correct: "will / ’ll" },
+  { id: 105, type: "fill_blank", question: "My sister is pregnant. She ______ have her baby soon.", correct: "is going to / ’s going to" },
+  // ── Part 8 — Translation (escribir la traducción al inglés) ──
+  { id: 106, type: "translation", question: "Yo estaba en la casa ayer.", correct: "I was at home yesterday." },
+  { id: 107, type: "translation", question: "Mi hermana no fue al colegio el lunes.", correct: "My sister didn’t go to school on Monday." },
+  { id: 108, type: "translation", question: "¿Había muchos estudiantes en la clase?", correct: "Were there many students in the class?" },
+  { id: 109, type: "translation", question: "Carlos estaba viendo televisión cuando su mamá llegó.", correct: "Carlos was watching TV when his mom arrived." },
+  { id: 110, type: "translation", question: "Nosotros vamos a estudiar inglés esta noche.", correct: "We are going to study English tonight." },
+  { id: 111, type: "translation", question: "No había agua en la botella.", correct: "There wasn’t any water in the bottle." },
+  { id: 112, type: "translation", question: "Laura no compró comida ayer.", correct: "Laura didn’t buy food yesterday." },
+  { id: 113, type: "translation", question: "¿Tu hermano puede ayudarme con esta tarea?", correct: "Can your brother help me with this homework?" },
+  { id: 114, type: "translation", question: "Ellos deben limpiar su habitación hoy.", correct: "They must clean their room today." },
+  { id: 115, type: "translation", question: "Tú deberías practicar inglés todos los días.", correct: "You should practice English every day." },
+  { id: 116, type: "translation", question: "María se lastimó mientras estaba cocinando.", correct: "Maria hurt herself while she was cooking." },
+  { id: 117, type: "translation", question: "Yo los vi en el supermercado.", correct: "I saw them at the supermarket." },
+  { id: 118, type: "translation", question: "Mis amigos viajarán a México el próximo año.", correct: "My friends will travel to Mexico next year." },
+  { id: 119, type: "translation", question: "¿Estabas trabajando ayer?", correct: "Were you working yesterday?" },
+  { id: 120, type: "translation", question: "Sofía quería aprender a cocinar.", correct: "Sofia wanted to learn to cook." },
 ];
 
 // MODO PRUEBAS: solo estas preguntas se presentan (deben coincidir con
 // ACTIVE_QUESTION_IDS de lib/exam.js). Pon `null` para usar el banco completo.
-const ACTIVE_QUESTION_IDS = [1, 2, 31, 61, 101];
+const ACTIVE_QUESTION_IDS = null;
 const EXAM_QUESTIONS = ACTIVE_QUESTION_IDS
   ? ALL_EXAM_QUESTIONS.filter((q) => ACTIVE_QUESTION_IDS.includes(q.id))
   : ALL_EXAM_QUESTIONS;
@@ -170,43 +177,42 @@ const EXAM_QUESTIONS = ACTIVE_QUESTION_IDS
 const EXAM_PARTS = [
   {
     from: 1, to: 30,
-    title: "Part 1 – Present Continuous and simple",
+    title: "Part 1 – Multiple Choice",
     instr: "Choose the correct option to complete each sentence.",
   },
   {
-    from: 31, to: 45,
-    title: "Part 2 – Possessive Adjectives",
-    instr: "Complete the sentences with the correct possessive adjective: my, your, her, his, their, our, its.",
+    from: 31, to: 50,
+    title: "Part 2 – Past Simple Verbs",
+    instr: "Write the past simple form of each verb.",
   },
   {
-    from: 46, to: 60,
-    title: "Part 3 – Demonstratives",
-    instr: "Complete the sentences with the correct demonstrative: this, that, these, those.",
+    from: 51, to: 65,
+    title: "Part 3 – Complete the Sentences",
+    instr: "Complete each sentence with the correct form of the verb in parentheses.",
   },
   {
-    from: 61, to: 80,
-    title: "Part 4 – Plurals",
-    instr: "Write the plural form of each word.",
+    from: 66, to: 75,
+    title: "Part 4 – Object Pronouns",
+    instr: "Complete the sentences with the correct object pronoun: me, you, him, her, it, us, them.",
   },
   {
-    from: 81, to: 100,
-    title: "Part 5 – There is / There are + Many / Much",
-    sections: [
-      {
-        from: 81, to: 90,
-        header: "A. Complete with There is or There are",
-        instr: "Complete each sentence with the correct form of There is or There are. Important: If you see (-) at the end of the sentence, write the sentence in negative form. If you see (?) at the end, write it as a question.",
-      },
-      {
-        from: 91, to: 100,
-        header: "B. Complete with Many or Much",
-        instr: "Complete each sentence with many or much.",
-      },
-    ],
+    from: 76, to: 85,
+    title: "Part 5 – Modal Verbs",
+    instr: "Complete each sentence with can, should, or must.",
   },
   {
-    from: 101, to: 115,
-    title: "Part 6 – Translation",
+    from: 86, to: 95,
+    title: "Part 6 – Reflexive Pronouns",
+    instr: "Complete the sentences with the correct reflexive pronoun: myself, yourself, himself, herself, itself, ourselves, yourselves, themselves.",
+  },
+  {
+    from: 96, to: 105,
+    title: "Part 7 – Choose the Correct Future Form",
+    instr: "Complete the sentences with will or be going to.",
+  },
+  {
+    from: 106, to: 120,
+    title: "Part 8 – Translation",
     instr: "Translate the sentences into English.",
   },
 ];
@@ -214,7 +220,7 @@ const partOf = (id) => EXAM_PARTS.find((p) => id >= p.from && id <= p.to) || nul
 
 // Aciertos por categoría para la pantalla de resultado:
 //  - Grammar = preguntas de opción múltiple (total = 30).
-//  - Writing = todo lo que el alumno escribe: completar + traducción (total = 85).
+//  - Writing = todo lo que el alumno escribe: completar + traducción (total = 90).
 // Devuelve aciertos y total de cada categoría → se muestra como "X/total".
 // details: [{ id, score }].
 function scoreByCategory(details) {
@@ -243,7 +249,8 @@ const countWords = (text) => text.trim().split(/\s+/).filter(Boolean).length;
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
 // Clave de localStorage para guardar el progreso (borrador) por estudiante.
-const draftKey = (email) => `speakeasy_eval_${String(email).trim().toLowerCase()}`;
+// Lleva la versión del examen (a2) para no restaurar borradores del examen anterior.
+const draftKey = (email) => `speakeasy_eval_a2_${String(email).trim().toLowerCase()}`;
 
 // Fondo morado con glows radiales (pantalla intro y, a futuro, otras).
 const INTRO_BG =
@@ -677,7 +684,7 @@ export default function EnglishExam() {
   const [nameSubmitted, setNameSubmitted] = useState(false);
   const [validating, setValidating] = useState(false);
   const [authError, setAuthError] = useState(null);
-  const [selectedModule, setSelectedModule] = useState(null); // null | "evaluacion" | "agendamiento"
+  const [selectedModule, setSelectedModule] = useState(null); // null | "evaluacion"
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [introSeen, setIntroSeen] = useState(false);
   const [answers, setAnswers] = useState({});
@@ -756,7 +763,7 @@ export default function EnglishExam() {
     };
   }, [examActive]);
 
-  // Al cargar: si ya hay sesión activa (p.ej. el estudiante volvió de /agendar),
+  // Al cargar: si ya hay sesión activa,
   // saltar el login y mostrar el menú directamente.
   useEffect(() => {
     let cancelado = false;
@@ -794,19 +801,6 @@ export default function EnglishExam() {
     setExamStart(start); // si no había borrador, arranca el cronómetro ahora
     draftLoadedRef.current = true;
   }, [selectedModule, result, studentEmail]);
-
-  // En el hub: verifica si este correo YA presentó la evaluación. Solo a los que
-  // ya la presentaron se les habilita el botón del test (para ver resultados).
-  useEffect(() => {
-    if (!nameSubmitted || selectedModule || !studentEmail) return;
-    let cancel = false;
-    setYaPresento(null); // verificando
-    axios
-      .post("/api/mi-evaluacion", { email: studentEmail.trim() })
-      .then((r) => { if (!cancel) setYaPresento(!!r.data?.exists); })
-      .catch(() => { if (!cancel) setYaPresento(false); });
-    return () => { cancel = true; };
-  }, [nameSubmitted, selectedModule, studentEmail]);
 
   // Guarda el progreso (respuestas, pregunta actual y arranque del cronómetro).
   useEffect(() => {
@@ -911,12 +905,12 @@ export default function EnglishExam() {
   };
 
   // Cierra la carga y muestra la celebración con el resultado.
-  const mostrarResultado = ({ score, feedback, details, speaking }) => {
+  const mostrarResultado = ({ score, feedback, details }) => {
     clearInterval(timerRef.current);
     setSubmitProgress(100);
     setTimeout(() => {
       setSubmitting(false);
-      setResult({ score, feedback, details, speaking: Number(speaking) || 0 });
+      setResult({ score, feedback, details });
       setCorrections(details || null);
       setShowCelebration(true);
       try { localStorage.removeItem(draftKey(studentEmail)); } catch {}
@@ -959,7 +953,6 @@ export default function EnglishExam() {
           score: data.total_score,
           feedback: data.global_report.resumen_desempeño,
           details: data.detailed_results,
-          speaking: data.speaking_score,
         });
       } else {
         // Respuestas guardadas, pero la IA aún no respondió: seguimos cargando
@@ -969,7 +962,6 @@ export default function EnglishExam() {
           score: fb.total_score ?? data.total_score,
           feedback: fb.feedback,
           details: fb.detailed_results ?? data.detailed_results,
-          speaking: fb.speaking_score ?? data.speaking_score,
         });
       }
     } catch (err) {
@@ -981,7 +973,6 @@ export default function EnglishExam() {
           score: fb.total_score,
           feedback: fb.feedback,
           details: fb.detailed_results,
-          speaking: fb.speaking_score,
         });
       } catch (e2) {
         clearInterval(timerRef.current);
@@ -1016,7 +1007,6 @@ export default function EnglishExam() {
     setIntroSeen(false);
     setCurrentIndex(0); setExamStart(null);
     setShowConfirm(false); setShowCelebration(false);
-    setYaPresento(null);
   };
 
   // Cierra sesión: limpia la cookie de sesión y vuelve al login.
@@ -1076,7 +1066,6 @@ export default function EnglishExam() {
           score: res.data.total_score,
           feedback: res.data.feedback || "Evaluación completada.",
           details: res.data.detailed_results,
-          speaking: Number(res.data.speaking_score) || 0,
         });
         setAlreadySubmitted(true);
         setCurrentIndex(0);
@@ -1438,6 +1427,12 @@ export default function EnglishExam() {
                     )}
                   </React.Fragment>
                 ))}
+                {examQ.hint && (
+                  <>
+                    <br />
+                    <strong>{examQ.hint}</strong>
+                  </>
+                )}
               </div>
             </>
           )}
@@ -1590,7 +1585,6 @@ export default function EnglishExam() {
                 {[
                   ["Writing score", cats.writingOk, cats.writingTot],
                   ["Grammar score", cats.grammarOk, cats.grammarTot],
-                  ["Speaking score", result.speaking ?? 0, 30],
                 ].map(([label, num, tot]) => (
                   <div key={label} style={xs.celebRow}>
                     <span style={xs.celebRowLabel}>{label}</span>
@@ -1754,6 +1748,12 @@ export default function EnglishExam() {
                           )}
                         </React.Fragment>
                       ))}
+                      {examQ.hint && (
+                        <>
+                          <br />
+                          <strong>{examQ.hint}</strong>
+                        </>
+                      )}
                     </div>
                     {!ok && (
                       <p style={xs.revCorrectLine}>

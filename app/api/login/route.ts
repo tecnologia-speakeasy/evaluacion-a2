@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { query } from "@/lib/agenda/db";
+import { query } from "@/lib/db";
 import { setSession } from "@/lib/agenda/auth";
-import { citaDeEstudiante } from "@/lib/agenda/booking";
 
 export const runtime = "nodejs";
 
@@ -22,33 +21,30 @@ export async function POST(req: Request) {
   }
   const { nombre, email } = parsed.data;
 
-  // Autorización: el correo debe existir en agendamiento.estudiantes_autorizados.
+  // Autorización: el correo debe existir en estudiantes_autorizados (schema de DATABASE_URL).
   // Normalizamos ambos lados (trim + lower) porque hay correos cargados con
   // mayúsculas o espacios sobrantes.
-  const autorizado = await query<{ id: number }>(
-    `SELECT id FROM agendamiento.estudiantes_autorizados WHERE lower(trim(email)) = $1 LIMIT 1`,
+  const { rows: autorizado } = await query(
+    `SELECT id FROM estudiantes_autorizados WHERE lower(trim(email)) = $1 LIMIT 1`,
     [email]
   );
   if (autorizado.length === 0) {
     return NextResponse.json(
-      { error: "No estás autorizado para agendar. Verifica tu correo." },
+      { error: "No estás autorizado para la evaluación. Verifica tu correo." },
       { status: 403 }
     );
   }
 
   // Upsert del estudiante (guarda el nombre capturado; actualiza si reingresa).
-  const est = await query<{ id: number }>(
-    `INSERT INTO agendamiento.estudiantes (email, nombre)
+  const { rows: estRows } = await query(
+    `INSERT INTO estudiantes (email, nombre)
      VALUES ($1, $2)
      ON CONFLICT (email) DO UPDATE SET nombre = EXCLUDED.nombre
      RETURNING id`,
     [email, nombre]
   );
-  const estudianteId = est[0].id;
+  const estudianteId = (estRows as unknown as { id: number }[])[0].id;
 
   await setSession({ estudianteId, email, nombre });
-
-  // Si ya tiene cita activa, lo informamos para que la UI lo redirija.
-  const cita = await citaDeEstudiante(estudianteId);
-  return NextResponse.json({ ok: true, yaAgendo: !!cita });
+  return NextResponse.json({ ok: true });
 }

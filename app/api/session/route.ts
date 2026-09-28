@@ -4,7 +4,7 @@ import { getSession } from "@/lib/agenda/auth";
 export const runtime = "nodejs";
 
 // Devuelve la sesión actual (de la cookie firmada) si existe. La usa la pantalla
-// de inicio para, si el estudiante ya inició sesión (p.ej. volvió de /agendar),
+// de inicio para, si el estudiante ya inició sesión,
 // mostrarle el menú directamente en vez de pedir login de nuevo.
 export async function GET() {
   const s = await getSession();

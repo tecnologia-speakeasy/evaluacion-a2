@@ -35,16 +35,13 @@ export async function POST(request) {
   }
 
   // Verificar que el correo esté autorizado (defensa contra envíos directos que
-  // se salten la validación del front). De paso traemos su manychat_id (WhatsApp)
-  // y su puntaje de speaking (cargado manualmente; 0 si aún no lo tiene).
+  // se salten la validación del front). De paso traemos su manychat_id (WhatsApp).
   let manychatId = null;
-  let speakingScore = 0;
   try {
     const { rows } = await query(
-      `SELECT a.manychat_id, COALESCE(s.score, 0) AS speaking_score
-         FROM estudiantes_autorizados a
-         LEFT JOIN speaking_scores s ON lower(trim(s.email)) = lower(trim(a.email))
-        WHERE lower(trim(a.email)) = $1 LIMIT 1`,
+      `SELECT manychat_id
+         FROM estudiantes_autorizados
+        WHERE lower(trim(email)) = $1 LIMIT 1`,
       [email]
     );
     if (rows.length === 0) {
@@ -54,7 +51,6 @@ export async function POST(request) {
       );
     }
     manychatId = rows[0].manychat_id;
-    speakingScore = Number(rows[0].speaking_score) || 0;
   } catch (err) {
     console.error("[/api/submit] Error verificando autorización:", err);
     return NextResponse.json(
@@ -71,7 +67,7 @@ export async function POST(request) {
   const scores = { ...perQuestion }; // { id: 0|10 } (para el feedback)
   // Total sobre 100 (cada pregunta vale lo mismo: 100 / nº de preguntas).
   const finalTotal = scoreOutOf100(subtotal);
-  // Aciertos por categoría (Grammar /30, Writing /85) para guardarlos y reportes.
+  // Aciertos por categoría (Grammar /30, Writing /90) para guardarlos y reportes.
   const { grammar: grammarScore, writing: writingScore } = categoryScores(perQuestion);
 
   // 2. Guardar de inmediato en Postgres (estado 'pendiente'). Si la IA falla
@@ -154,7 +150,6 @@ export async function POST(request) {
     objective_subtotal: subtotal,
     global_report: { resumen_desempeño: feedbackText ?? null },
     detailed_results: detailedResults,
-    speaking_score: speakingScore,
     ai_failed: aiFailed,
   });
 }
