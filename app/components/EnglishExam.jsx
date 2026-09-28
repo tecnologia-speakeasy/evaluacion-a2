@@ -247,6 +247,12 @@ function scoreByCategory(details) {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const countWords = (text) => text.trim().split(/\s+/).filter(Boolean).length;
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+// Fecha corta de un intento, ej. "12 sept, 3:45 p. m.".
+const fmtFechaIntento = (iso) => {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleString("es-CO", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+};
 
 // Clave de localStorage para guardar el progreso (borrador) por estudiante.
 // Lleva la versión del examen (a2) para no restaurar borradores del examen anterior.
@@ -424,8 +430,9 @@ const xs = {
   loadVideo: { width: "min(440px, 82vw)", height: "auto", borderRadius: 16 },
   // Pantalla de celebración (antes del feedback).
   celebOverlay: {
-    position: "fixed", inset: 0, zIndex: 250, background: INTRO_BG, overflow: "hidden",
-    display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+    position: "fixed", inset: 0, zIndex: 250, background: INTRO_BG,
+    overflowX: "hidden", overflowY: "auto",
+    display: "flex", flexDirection: "column", alignItems: "center",
     padding: 24, textAlign: "center",
   },
   celebInner: { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" },
@@ -456,6 +463,47 @@ const xs = {
     width: "min(420px, 82vw)", background: "linear-gradient(90deg, #FF327D 0%, #6D2EBF 100%)",
     color: "#fff", fontWeight: 600, fontSize: 15, cursor: "pointer",
   },
+  // Contenido de la celebración: margin auto centra verticalmente, pero si no
+  // cabe (varios intentos / celular) deja hacer scroll desde arriba.
+  celebContent: {
+    position: "relative", zIndex: 1, margin: "auto 0",
+    display: "flex", flexDirection: "column", alignItems: "center",
+  },
+  // Selector de intentos (debajo de "Revisa tu Feedback").
+  attemptsWrap: { display: "flex", flexDirection: "column", gap: 10, width: "min(420px, 82vw)", marginTop: 26 },
+  attemptsLabel: {
+    fontSize: 12, fontWeight: 700, letterSpacing: 1.2, textTransform: "uppercase",
+    color: "rgba(255,255,255,0.6)", textAlign: "left", margin: "0 0 2px 4px",
+  },
+  attemptBtn: {
+    display: "flex", alignItems: "center", gap: 14, width: "100%", textAlign: "left",
+    background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.16)",
+    borderRadius: 14, padding: "10px 14px", color: "#fff", cursor: "pointer", fontFamily: "inherit",
+    transition: "background 0.15s, border-color 0.15s, transform 0.15s",
+  },
+  attemptBtnActive: {
+    background: "rgba(255,50,125,0.16)", border: "1px solid #FF327D", cursor: "default",
+  },
+  attemptNum: {
+    width: 36, height: 36, flexShrink: 0, borderRadius: "50%",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontSize: 15, fontWeight: 800, background: "rgba(255,255,255,0.14)", color: "#fff",
+  },
+  attemptNumActive: { background: "linear-gradient(135deg, #FF327D 0%, #6D2EBF 100%)" },
+  attemptInfo: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 2 },
+  attemptTitle: { fontSize: 15, fontWeight: 600, color: "#fff" },
+  attemptDate: { fontSize: 12, color: "rgba(255,255,255,0.6)" },
+  attemptScore: { fontSize: 18, fontWeight: 800, color: "#fff", flexShrink: 0 },
+  attemptScoreTot: { fontSize: 13, fontWeight: 700, color: "#FF7AAE", marginLeft: 1 },
+  attemptSide: {
+    flexShrink: 0, minWidth: 58, textAlign: "center", fontSize: 12, fontWeight: 600,
+    color: "rgba(255,255,255,0.75)",
+  },
+  attemptTag: {
+    display: "inline-block", fontSize: 11, fontWeight: 700, padding: "4px 10px",
+    borderRadius: 999, background: "#FF327D", color: "#fff",
+  },
+  attemptError: { fontSize: 13, color: "#ffb4c8", textAlign: "center", margin: "2px 0 0" },
   // Pantalla de feedback final.
   fbOverlay: {
     position: "fixed", inset: 0, zIndex: 250, background: INTRO_BG,
@@ -699,6 +747,11 @@ export default function EnglishExam() {
   const [isMobile, setIsMobile] = useState(false); // layout de celular
   const [showConfirm, setShowConfirm] = useState(false); // confirmación antes de enviar
   const [showCelebration, setShowCelebration] = useState(false); // felicitaciones antes del feedback
+  // Intentos previos: [{ id, numero, total_score, created_at }] (del más antiguo al más reciente).
+  const [attempts, setAttempts] = useState([]);
+  const [activeAttemptId, setActiveAttemptId] = useState(null);   // intento que se está mostrando
+  const [loadingAttemptId, setLoadingAttemptId] = useState(null); // intento que se está cargando
+  const [attemptError, setAttemptError] = useState(null);
   const [examStart, setExamStart] = useState(null); // timestamp ms de inicio
   const [nowTick, setNowTick] = useState(0);         // re-render cada segundo
   const timerRef = useRef(null);
@@ -904,10 +957,53 @@ export default function EnglishExam() {
     }
   };
 
+  // Muestra una evaluación guardada (respuesta de /api/mi-evaluacion) y
+  // actualiza la lista de intentos.
+  const aplicarEvaluacion = (d) => {
+    setAnswers(d.answers || {});
+    setCorrections(d.detailed_results || null);
+    setResult({
+      score: d.total_score,
+      feedback: d.feedback || "Evaluación completada.",
+      details: d.detailed_results,
+    });
+    setAttempts(d.attempts || []);
+    setActiveAttemptId(d.id ?? null);
+  };
+
+  // Refresca la lista de intentos (el más reciente queda como el activo).
+  const cargarIntentos = async () => {
+    try {
+      const res = await axios.post("/api/mi-evaluacion", { email: studentEmail.trim() });
+      if (res.data?.exists) {
+        setAttempts(res.data.attempts || []);
+        setActiveAttemptId(res.data.id ?? null);
+      }
+    } catch {}
+  };
+
+  // "Ver intento N": carga ese intento y lo muestra en la misma pantalla.
+  const verIntento = async (id) => {
+    if (id === activeAttemptId || loadingAttemptId) return;
+    setLoadingAttemptId(id);
+    setAttemptError(null);
+    try {
+      const res = await axios.post("/api/mi-evaluacion", { email: studentEmail.trim(), id });
+      if (!res.data?.exists) throw new Error("intento_no_encontrado");
+      aplicarEvaluacion(res.data);
+      setCurrentIndex(0);
+    } catch {
+      setAttemptError("No pudimos cargar ese intento. Intenta de nuevo.");
+    } finally {
+      setLoadingAttemptId(null);
+    }
+  };
+
   // Cierra la carga y muestra la celebración con el resultado.
   const mostrarResultado = ({ score, feedback, details }) => {
     clearInterval(timerRef.current);
     setSubmitProgress(100);
+    cargarIntentos(); // incluye el intento recién enviado
     setTimeout(() => {
       setSubmitting(false);
       setResult({ score, feedback, details });
@@ -994,6 +1090,7 @@ export default function EnglishExam() {
     tabSwitchesRef.current = 0; draftLoadedRef.current = false;
     setCurrentIndex(0); setExamStart(null); setNowTick(0);
     setIntroSeen(false);
+    setActiveAttemptId(null); setAttemptError(null);
     setSelectedModule("evaluacion");
   };
 
@@ -1007,6 +1104,7 @@ export default function EnglishExam() {
     setIntroSeen(false);
     setCurrentIndex(0); setExamStart(null);
     setShowConfirm(false); setShowCelebration(false);
+    setAttempts([]); setActiveAttemptId(null); setAttemptError(null);
   };
 
   // Cierra sesión: limpia la cookie de sesión y vuelve al login.
@@ -1060,13 +1158,8 @@ export default function EnglishExam() {
         email: studentEmail.trim(),
       });
       if (res.data?.exists) {
-        setAnswers(res.data.answers || {});
-        setCorrections(res.data.detailed_results || null);
-        setResult({
-          score: res.data.total_score,
-          feedback: res.data.feedback || "Evaluación completada.",
-          details: res.data.detailed_results,
-        });
+        aplicarEvaluacion(res.data);
+        setAttemptError(null);
         setAlreadySubmitted(true);
         setCurrentIndex(0);
         setShowReviewMode(true); // al reingresar: muestra la revisión + feedback
@@ -1295,6 +1388,14 @@ export default function EnglishExam() {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.05); }
         }
+        .attempt-btn:not(:disabled):hover {
+          background: rgba(255,255,255,0.15) !important;
+          border-color: rgba(255,255,255,0.32) !important;
+          transform: translateY(-1px);
+        }
+        .attempt-btn:focus-visible { outline: 2px solid #FF327D; outline-offset: 2px; }
+        .attempt-arrow { display: inline-block; font-size: 18px; transition: transform 0.15s; }
+        .attempt-btn:not(:disabled):hover .attempt-arrow { transform: translateX(3px); color: #fff; }
       `}</style>
       {securityWarn && (
         <div style={styles.securityOverlay}>
@@ -1565,44 +1666,89 @@ export default function EnglishExam() {
       {result && showCelebration && (
         <div style={xs.celebOverlay}>
           <Confetti />
-          <div style={xs.celebInner}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={celebracionPorPuntaje(result.score).img} alt="" style={xs.celebTrophy} />
-            <h2 style={xs.celebTitle}>{celebracionPorPuntaje(result.score).titulo}</h2>
-            <p style={xs.celebSub}>{celebracionPorPuntaje(result.score).sub}</p>
-            <div style={xs.celebCard}>
-              <div style={xs.celebRingWrap}>
-                <ProgressRing
-                  progress={typeof result.score === "number" ? Math.max(0, Math.min(100, result.score)) : 0}
-                  size={140} stroke={9} color="#FF327D" track="rgba(255,255,255,0.18)"
-                />
-                <div style={xs.celebScoreCtr}>
-                  <span style={xs.celebScoreVal}>{result.score}</span>
-                  <span style={xs.celebScoreLabel}>Puntaje</span>
+          <div style={xs.celebContent}>
+            <div style={xs.celebInner}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={celebracionPorPuntaje(result.score).img} alt="" style={xs.celebTrophy} />
+              <h2 style={xs.celebTitle}>{celebracionPorPuntaje(result.score).titulo}</h2>
+              <p style={xs.celebSub}>{celebracionPorPuntaje(result.score).sub}</p>
+              <div style={xs.celebCard}>
+                <div style={xs.celebRingWrap}>
+                  <ProgressRing
+                    progress={typeof result.score === "number" ? Math.max(0, Math.min(100, result.score)) : 0}
+                    size={140} stroke={9} color="#FF327D" track="rgba(255,255,255,0.18)"
+                  />
+                  <div style={xs.celebScoreCtr}>
+                    <span style={xs.celebScoreVal}>{result.score}</span>
+                    <span style={xs.celebScoreLabel}>Puntaje</span>
+                  </div>
+                </div>
+                <div style={xs.celebRows}>
+                  {[
+                    ["Writing score", cats.writingOk, cats.writingTot],
+                    ["Grammar score", cats.grammarOk, cats.grammarTot],
+                  ].map(([label, num, tot]) => (
+                    <div key={label} style={xs.celebRow}>
+                      <span style={xs.celebRowLabel}>{label}</span>
+                      <span style={xs.celebRowVal}>
+                        {num}
+                        <span style={xs.celebRowTot}>/{tot}</span>
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div style={xs.celebRows}>
-                {[
-                  ["Writing score", cats.writingOk, cats.writingTot],
-                  ["Grammar score", cats.grammarOk, cats.grammarTot],
-                ].map(([label, num, tot]) => (
-                  <div key={label} style={xs.celebRow}>
-                    <span style={xs.celebRowLabel}>{label}</span>
-                    <span style={xs.celebRowVal}>
-                      {num}
-                      <span style={xs.celebRowTot}>/{tot}</span>
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
+            <button
+              onClick={() => { setShowReviewMode(false); setShowCelebration(false); }}
+              style={xs.celebBtn}
+            >
+              Revisa tu Feedback
+            </button>
+
+            {/* Selector de intentos (solo si hay más de uno) */}
+            {attempts.length > 1 && (
+              <div style={xs.attemptsWrap}>
+                <p style={xs.attemptsLabel}>Tus intentos</p>
+                {attempts.map((a) => {
+                  const active = a.id === activeAttemptId;
+                  const loading = a.id === loadingAttemptId;
+                  return (
+                    <button
+                      key={a.id}
+                      onClick={() => verIntento(a.id)}
+                      disabled={active}
+                      aria-current={active ? "true" : undefined}
+                      className="attempt-btn"
+                      style={{ ...xs.attemptBtn, ...(active ? xs.attemptBtnActive : {}) }}
+                    >
+                      <span style={{ ...xs.attemptNum, ...(active ? xs.attemptNumActive : {}) }}>
+                        {a.numero}
+                      </span>
+                      <span style={xs.attemptInfo}>
+                        <span style={xs.attemptTitle}>Ver intento {a.numero}</span>
+                        <span style={xs.attemptDate}>{fmtFechaIntento(a.created_at)}</span>
+                      </span>
+                      <span style={xs.attemptScore}>
+                        {a.total_score}
+                        <span style={xs.attemptScoreTot}>/100</span>
+                      </span>
+                      <span style={xs.attemptSide}>
+                        {active ? (
+                          <span style={xs.attemptTag}>Viendo</span>
+                        ) : loading ? (
+                          "Cargando…"
+                        ) : (
+                          <span className="attempt-arrow">→</span>
+                        )}
+                      </span>
+                    </button>
+                  );
+                })}
+                {attemptError && <p style={xs.attemptError}>{attemptError}</p>}
+              </div>
+            )}
           </div>
-          <button
-            onClick={() => { setShowReviewMode(false); setShowCelebration(false); }}
-            style={xs.celebBtn}
-          >
-            Revisa tu Feedback
-          </button>
         </div>
       )}
 

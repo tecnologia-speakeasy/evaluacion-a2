@@ -4,8 +4,12 @@ import { buildDetailedResults, gradeObjective } from "@/lib/exam";
 
 export const runtime = "nodejs";
 
-// Devuelve la evaluación previa del estudiante (si ya la presentó), para
+// Devuelve las evaluaciones previas del estudiante (si ya la presentó), para
 // mostrarle sus resultados en vez de dejarlo presentar de nuevo.
+// - Sin `id`: el detalle del intento más reciente.
+// - Con `id`: el detalle de ese intento (debe pertenecer al mismo correo).
+// En ambos casos incluye `attempts`: la lista resumida de TODOS sus intentos
+// (del más antiguo al más reciente) para el selector "Ver intento N".
 export async function POST(request) {
   let body;
   try {
@@ -16,21 +20,40 @@ export async function POST(request) {
 
   const email = String(body?.email ?? "").trim().toLowerCase();
   if (!email) return NextResponse.json({ exists: false }, { status: 400 });
+  const requestedId = body?.id != null ? Number(body.id) : null;
 
   try {
-    const { rows } = await query(
-      `SELECT puntaje_total, feedback, respuestas
-       FROM evaluaciones
-       WHERE lower(trim(email)) = $1
-       ORDER BY created_at DESC
-       LIMIT 1`,
+    const { rows: intentos } = await query(
+      `SELECT id, puntaje_total, created_at
+         FROM evaluaciones
+        WHERE lower(trim(email)) = $1
+        ORDER BY created_at ASC, id ASC`,
       [email]
     );
 
-    if (rows.length === 0) {
+    if (intentos.length === 0) {
       return NextResponse.json({ exists: false });
     }
 
+    const attempts = intentos.map((r, i) => ({
+      id: r.id,
+      numero: i + 1,
+      total_score: r.puntaje_total,
+      created_at: r.created_at,
+    }));
+
+    const target =
+      requestedId != null
+        ? intentos.find((r) => r.id === requestedId)
+        : intentos[intentos.length - 1];
+    if (!target) {
+      return NextResponse.json({ exists: false, error: "not_found" }, { status: 404 });
+    }
+
+    const { rows } = await query(
+      `SELECT puntaje_total, feedback, respuestas FROM evaluaciones WHERE id = $1`,
+      [target.id]
+    );
     const r = rows[0];
     const answers = r.respuestas ?? {};
     // Recalificamos las respuestas guardadas para tener el detalle correcto de
@@ -39,10 +62,12 @@ export async function POST(request) {
 
     return NextResponse.json({
       exists: true,
+      id: target.id,
       total_score: r.puntaje_total,
       feedback: r.feedback,
       detailed_results: buildDetailedResults(answers, perQuestion),
       answers,
+      attempts,
     });
   } catch (err) {
     console.error("[/api/mi-evaluacion] Error:", err);
