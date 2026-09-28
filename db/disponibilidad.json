@@ -1,0 +1,242 @@
+{
+  "_meta": {
+    "descripcion": "Disponibilidad por profesor, por dia de semana (lun-vie) y franja de 30 min. Horario completo 06:00-21:30.",
+    "lotes_recibidos": ["6:00AM-12:00PM", "12:30PM-5:00PM", "5:30PM-10:00PM"],
+    "pendiente": "ninguno (Lun-Vie completo). Confirmar mapeo y construir BD + slots de 30 min.",
+    "profesores": {
+      "Alejandra Rivera": 1,
+      "Christian Velilla": 2,
+      "Daniel Moreno": 3,
+      "Felipe Valencia": 4,
+      "David Quiroga": 5,
+      "Paula Londono": 6,
+      "Jose Gutierrez": 7
+    }
+  },
+  "slots": {
+    "06:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "06:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "07:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "07:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "08:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "08:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "09:00": {
+      "lun": ["Jose Gutierrez", "Paula Londono"],
+      "mar": ["Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Jose Gutierrez", "Felipe Valencia"]
+    },
+    "09:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "David Quiroga"],
+      "mie": ["Jose Gutierrez", "Alejandra Rivera"],
+      "jue": ["Jose Gutierrez", "Alejandra Rivera"],
+      "vie": ["Jose Gutierrez", "Alejandra Rivera"]
+    },
+    "10:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "10:30": {
+      "lun": ["Alejandra Rivera", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Felipe Valencia"]
+    },
+    "11:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "11:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Felipe Valencia"]
+    },
+    "12:00": {
+      "lun": ["Alejandra Rivera", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "David Quiroga"]
+    },
+    "12:30": {
+      "lun": ["Alejandra Rivera", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "jue": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla"],
+      "vie": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono", "David Quiroga"]
+    },
+    "13:00": {
+      "lun": ["Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Felipe Valencia", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mie": ["Felipe Valencia", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "jue": ["Felipe Valencia", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Jose Gutierrez", "Paula Londono"]
+    },
+    "13:30": {
+      "lun": ["Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Felipe Valencia", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mie": ["Felipe Valencia", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "jue": ["Felipe Valencia", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Jose Gutierrez", "Paula Londono"]
+    },
+    "14:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Alejandra Rivera", "Felipe Valencia", "Daniel Moreno", "Paula Londono", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Paula Londono"],
+      "jue": ["Alejandra Rivera", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Paula Londono"],
+      "vie": ["Alejandra Rivera", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Paula Londono"]
+    },
+    "14:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Alejandra Rivera", "Felipe Valencia", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mie": ["Alejandra Rivera", "Felipe Valencia", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "jue": ["Alejandra Rivera", "Felipe Valencia", "Daniel Moreno", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "vie": ["Alejandra Rivera", "Christian Velilla", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Paula Londono"]
+    },
+    "15:00": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono", "Christian Velilla"],
+      "mar": ["Alejandra Rivera", "Felipe Valencia", "Jose Gutierrez", "Paula Londono", "Christian Velilla"],
+      "mie": ["Alejandra Rivera", "Christian Velilla", "Felipe Valencia", "Jose Gutierrez", "Paula Londono"],
+      "jue": ["Alejandra Rivera", "Christian Velilla", "David Quiroga", "Felipe Valencia", "Jose Gutierrez", "Paula Londono"],
+      "vie": ["Christian Velilla", "Jose Gutierrez", "Paula Londono"]
+    },
+    "15:30": {
+      "lun": ["Alejandra Rivera", "Jose Gutierrez", "Paula Londono", "Christian Velilla", "Daniel Moreno"],
+      "mar": ["Alejandra Rivera", "Felipe Valencia", "Jose Gutierrez", "Paula Londono", "Christian Velilla", "Daniel Moreno"],
+      "mie": ["Alejandra Rivera", "Christian Velilla", "Daniel Moreno", "Felipe Valencia", "Jose Gutierrez", "Paula Londono"],
+      "jue": ["Alejandra Rivera", "Christian Velilla", "Daniel Moreno", "David Quiroga", "Felipe Valencia", "Jose Gutierrez", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "Jose Gutierrez", "Paula Londono"]
+    },
+    "16:00": {
+      "lun": ["Jose Gutierrez", "Daniel Moreno", "David Quiroga"],
+      "mar": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez"],
+      "mie": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez"],
+      "jue": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez"],
+      "vie": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez"]
+    },
+    "16:30": {
+      "lun": ["Jose Gutierrez", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "mar": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez", "Paula Londono"],
+      "mie": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez", "Paula Londono"],
+      "jue": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez", "Paula Londono"],
+      "vie": ["Daniel Moreno", "David Quiroga", "Jose Gutierrez", "Paula Londono"]
+    },
+    "17:00": {
+      "lun": ["Jose Gutierrez", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Christian Velilla", "Jose Gutierrez", "Paula Londono"],
+      "mie": ["Christian Velilla", "David Quiroga", "Jose Gutierrez", "Paula Londono"],
+      "jue": ["Christian Velilla", "Jose Gutierrez", "Paula Londono"],
+      "vie": ["Christian Velilla", "David Quiroga", "Paula Londono"]
+    },
+    "17:30": {
+      "lun": ["Jose Gutierrez", "Paula Londono", "Christian Velilla", "David Quiroga"],
+      "mar": ["Christian Velilla", "Jose Gutierrez", "Paula Londono"],
+      "mie": ["Christian Velilla", "David Quiroga", "Jose Gutierrez", "Paula Londono"],
+      "jue": ["Christian Velilla", "Jose Gutierrez", "Paula Londono"],
+      "vie": ["Christian Velilla", "David Quiroga", "Paula Londono"]
+    },
+    "18:00": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga"]
+    },
+    "18:30": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga"]
+    },
+    "19:00": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mar": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "Paula Londono"]
+    },
+    "19:30": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "Paula Londono", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"]
+    },
+    "20:00": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "Paula Londono", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"]
+    },
+    "20:30": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "Paula Londono", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"]
+    },
+    "21:00": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "Paula Londono", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"]
+    },
+    "21:30": {
+      "lun": ["Christian Velilla", "Daniel Moreno", "Paula Londono", "David Quiroga"],
+      "mar": ["Christian Velilla", "Daniel Moreno", "Paula Londono"],
+      "mie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "jue": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"],
+      "vie": ["Christian Velilla", "Daniel Moreno", "David Quiroga", "Paula Londono"]
+    }
+  }
+}
