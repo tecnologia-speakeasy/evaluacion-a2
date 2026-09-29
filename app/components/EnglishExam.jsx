@@ -1276,8 +1276,8 @@ export default function EnglishExam() {
         </header>
 
         <main style={styles.hubMain}>
-          <h1 style={styles.hubTitle}>¿Qué deseas hacer?</h1>
-          <p style={styles.hubSubtitle}>Elige una de nuestras opciones</p>
+          <h1 style={styles.hubTitle}>Dale clic al botón y comienza tu test del nivel A2</h1>
+          <p style={styles.hubSubtitle}>Lo harás muy bien :)</p>
           {authError && <p style={styles.hubError}>{authError}</p>}
 
           <button
